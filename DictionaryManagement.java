@@ -16,7 +16,7 @@ public class DictionaryManagement {
             word.setWord_explain(sc.nextLine());
             words[i] = word;
         }
-
+		
         dict.setWords(words);
     }
 
@@ -24,7 +24,7 @@ public class DictionaryManagement {
         System.out.println("No" + "    | English" + "         | Vietnamese");
         for (int i = 0; i < words.length; i++) {
             System.out.print((i + 1) + "     | ");
-            System.out.print(String.format("%-16s| ", words[i].getWord_target()));
+            System.out.printf("%-16s| ", words[i].getWord_target());
             System.out.print(words[i].getWord_explain() + "\n");
         }
     }
