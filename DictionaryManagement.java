@@ -54,17 +54,20 @@ public class DictionaryManagement {
         while (reEnter) {
             System.out.print("Search for: ");
             String key = sc.next();
+            if (key.equals("X") || key.equals("x")) {
+                reEnter = false;
+            }
             for (int i = 0; i < numOfWords; ++i) {
                 if (words[i].getWord_target().equals(key)) {
                     meaning = words[i].getWord_explain();
-                    reEnter = false;
                 }
             }
             if (meaning == null) {
-                System.out.println("No result! Please enter another word.");
+                System.out.println("No result! Please enter another word [Enter X to exit]");
+            } else {
+                System.out.println("Meaning: " + meaning + " [Enter X to exit]");
             }
         }
-        System.out.println("Meaning: " + meaning);
     }
 
     public void dictionaryAdd() {
