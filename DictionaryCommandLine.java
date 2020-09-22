@@ -10,8 +10,15 @@ public class DictionaryCommandLine {
         showAllWords();
     }
 
+    public void dictionaryAdvanced() {
+        dictManagement.insertFromFile();
+        showAllWords();
+        dictManagement.dictionaryLookup();
+    }
+
     public static void main(String[] args) {
         DictionaryCommandLine dictCommandLine = new DictionaryCommandLine();
-        dictCommandLine.dictionaryBasic();
+        //dictCommandLine.dictionaryBasic();
+        dictCommandLine.dictionaryAdvanced();
     }
 }
