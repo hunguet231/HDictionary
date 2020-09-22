@@ -1,3 +1,4 @@
+abstract	trừu tượng
+home	ngôi nhà
 cat	con mèo
 dog	con chó
-abstract	trừu tượng

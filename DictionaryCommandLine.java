@@ -14,6 +14,7 @@ public class DictionaryCommandLine {
         dictManagement.insertFromFile();
         showAllWords();
         dictManagement.dictionaryLookup();
+        dictManagement.dictionaryAdd();
     }
 
     public static void main(String[] args) {

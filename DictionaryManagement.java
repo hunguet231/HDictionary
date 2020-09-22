@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Scanner;
 
 public class DictionaryManagement {
@@ -12,7 +10,7 @@ public class DictionaryManagement {
         Scanner sc = new Scanner(System.in);
         numOfWords = sc.nextInt();
         sc.nextLine();
-        words = new Word[numOfWords];
+        Word[] words = new Word[numOfWords];
 
         for (int i = 0; i < numOfWords; i++) {
             Word word = new Word();
@@ -30,7 +28,6 @@ public class DictionaryManagement {
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
-            words = new Word[1000];
             String line;
             while ((line = br.readLine()) != null) {
                 String[] lines = line.split("\\t");
@@ -42,6 +39,8 @@ public class DictionaryManagement {
                 words[numOfWords] = word;
                 numOfWords++;
             }
+            fr.close();
+            br.close();
         } catch (Exception ex) {
             System.out.println("Error: " + ex);
         }
@@ -51,6 +50,7 @@ public class DictionaryManagement {
         Scanner sc = new Scanner(System.in);
         boolean reEnter = true;
         String meaning = null;
+
         while (reEnter) {
             System.out.print("Search for: ");
             String key = sc.next();
@@ -67,14 +67,60 @@ public class DictionaryManagement {
         System.out.println("Meaning: " + meaning);
     }
 
-    public void show() {
-        System.out.println("No" + "    | English" + "         | Vietnamese");
-        for (int i = 0; i < words.length; i++) {
-            if (words[i] != null) {
-                System.out.print((i + 1) + "     | ");
-                System.out.printf("%-16s| ", words[i].getWord_target());
-                System.out.print(words[i].getWord_explain() + "\n");
+    public void dictionaryAdd() {
+        try {
+            Scanner sc = new Scanner(System.in);
+            Word newWord = new Word();
+
+            File f = new File("src/res/dictionaries.txt");
+            FileWriter fw = new FileWriter(f);
+
+            System.out.println("==============================================");
+            System.out.println("|        Add a new word to dictionary        |");
+            System.out.println("==============================================");
+            System.out.print("Word in English: ");
+            newWord.setWord_target(sc.nextLine());
+            System.out.print("Explain in Vietnamese: ");
+            newWord.setWord_explain(sc.nextLine());
+
+            words[numOfWords] = newWord;
+            numOfWords++;
+
+            // Change words array to string
+            String wordsString = "";
+            for (int i = 0; i < numOfWords; i++) {
+                wordsString += words[i].getWord_target() + "\t" + words[i].getWord_explain() + "\n";
             }
+
+            // Store data into dictionaries.txt file and close
+            fw.write(wordsString);
+            fw.close();
+
+            System.out.println("✔ Added");
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex);
         }
+    }
+
+    public void dictionaryEdit() {
+
+    }
+
+    public void dictionaryDelete() {
+
+    }
+
+    public void show() {
+        System.out.println("");
+        System.out.println("============DICTIONARY COMMAND LINE===========");
+        System.out.println("");
+        System.out.println("No" + "    | English" + "         | Vietnamese");
+        System.out.println("==============================================");
+        for (int i = 0; i < numOfWords; i++) {
+            System.out.print((i + 1) + "     | ");
+            System.out.printf("%-16s| ", words[i].getWord_target());
+            System.out.print(words[i].getWord_explain() + "\n");
+        }
+        System.out.println("");
     }
 }
