@@ -1,2 +1,4 @@
 cat	con mèo
 home	ngôi nhà
+member	thành viên
+currency	tiền tệ

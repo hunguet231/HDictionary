@@ -5,6 +5,10 @@ public class DictionaryCommandLine {
         dictManagement.show();
     }
 
+    public void dictionarySearcher() {
+        dictManagement.search();
+    }
+
     public void dictionaryBasic() {
         dictManagement.insertFromCommandLine();
         showAllWords();
@@ -15,6 +19,8 @@ public class DictionaryCommandLine {
         showAllWords();
         dictManagement.dictionaryLookup();
         dictManagement.dictionaryAdd();
+        dictManagement.dictionaryEdit();
+        dictManagement.dictionaryDelete();
     }
 
     public static void main(String[] args) {

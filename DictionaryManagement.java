@@ -46,6 +46,25 @@ public class DictionaryManagement {
         }
     }
 
+    public void dictionaryExportToFile() {
+        try {
+            File f = new File("src/res/dictionaries.txt");
+            FileWriter fw = new FileWriter(f);
+
+            // Change words array to string
+            String wordsString = "";
+            for (int i = 0; i < numOfWords; i++) {
+                wordsString += words[i].getWord_target() + "\t" + words[i].getWord_explain() + "\n";
+            }
+
+            // Store data into dictionaries.txt file and close
+            fw.write(wordsString);
+            fw.close();
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex);
+        }
+    }
+
     public void dictionaryLookup() {
         Scanner sc = new Scanner(System.in);
         boolean reEnter = true;
@@ -70,43 +89,33 @@ public class DictionaryManagement {
         }
     }
 
+    public void search() {
+        String key = "";
+        System.out.print("Type something to search: ");
+
+    }
+
     public void dictionaryAdd() {
-        try {
-            Scanner sc = new Scanner(System.in);
-            Word newWord = new Word();
+        Scanner sc = new Scanner(System.in);
+        Word newWord = new Word();
 
-            File f = new File("src/res/dictionaries.txt");
-            FileWriter fw = new FileWriter(f);
+        System.out.println("==============================================");
+        System.out.println("|        Add a new word to dictionary        |");
+        System.out.println("==============================================");
+        System.out.print("Word in English: ");
+        newWord.setWord_target(sc.nextLine());
+        System.out.print("Explain in Vietnamese: ");
+        newWord.setWord_explain(sc.nextLine());
 
-            System.out.println("==============================================");
-            System.out.println("|        Add a new word to dictionary        |");
-            System.out.println("==============================================");
-            System.out.print("Word in English: ");
-            newWord.setWord_target(sc.nextLine());
-            System.out.print("Explain in Vietnamese: ");
-            newWord.setWord_explain(sc.nextLine());
+        words[numOfWords] = newWord;
+        numOfWords++;
 
-            words[numOfWords] = newWord;
-            numOfWords++;
+        dictionaryExportToFile();
 
-            // Change words array to string
-            String wordsString = "";
-            for (int i = 0; i < numOfWords; i++) {
-                wordsString += words[i].getWord_target() + "\t" + words[i].getWord_explain() + "\n";
-            }
-
-            // Store data into dictionaries.txt file and close
-            fw.write(wordsString);
-            fw.close();
-
-            System.out.println("✔ Added");
-        } catch (IOException ex) {
-            System.out.println("Error: " + ex);
-        }
+        System.out.println("✔ Added");
     }
 
     public void dictionaryEdit() {
-
     }
 
     public void dictionaryDelete() {
@@ -126,4 +135,5 @@ public class DictionaryManagement {
         }
         System.out.println("");
     }
+
 }
