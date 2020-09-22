@@ -16,11 +16,12 @@ public class DictionaryCommandLine {
 
     public void dictionaryAdvanced() {
         dictManagement.insertFromFile();
-        showAllWords();
-        dictManagement.dictionaryLookup();
-        dictManagement.dictionaryAdd();
-        dictManagement.dictionaryEdit();
-        dictManagement.dictionaryDelete();
+//        showAllWords();
+//        dictManagement.dictionaryLookup();
+//        dictManagement.dictionaryAdd();
+//        dictManagement.dictionaryEdit();
+//        dictManagement.dictionaryDelete();
+        dictionarySearcher();
     }
 
     public static void main(String[] args) {

@@ -67,14 +67,13 @@ public class DictionaryManagement {
 
     public void dictionaryLookup() {
         Scanner sc = new Scanner(System.in);
-        boolean reEnter = true;
         String meaning = null;
 
-        while (reEnter) {
+        while (true) {
             System.out.print("Search for: ");
             String key = sc.next();
             if (key.equals("X") || key.equals("x")) {
-                reEnter = false;
+                return;
             }
             for (int i = 0; i < numOfWords; ++i) {
                 if (words[i].getWord_target().equals(key)) {
@@ -90,9 +89,35 @@ public class DictionaryManagement {
     }
 
     public void search() {
-        String key = "";
-        System.out.print("Type something to search: ");
+        Scanner sc = new Scanner(System.in);
+        Word[] result = new Word[100];
+        int numOfRes = 0;
+        boolean checkRes = true;
 
+        while (true) {
+            System.out.print("Type something to search: ");
+            String key = sc.next();
+            if (key.equals("X") || key.equals("x")) {
+                return;
+            }
+            for (int i = 0; i < numOfWords; ++i) {
+                if (words[i].getWord_target().startsWith(key)) {
+                    result[numOfRes] = words[i];
+                    numOfRes++;
+                    checkRes = false;
+                }
+            }
+            if (checkRes) {
+                System.out.println("No result! Please enter another word [Enter X to exit]");
+            } else {
+                System.out.println("<Result>    [Enter X to exit]");
+                for (int i = 0; i < result.length; i++) {
+                    if (result[i] != null) {
+                        System.out.println("    " + result[i].getWord_target() + ": " + result[i].getWord_explain());
+                    }
+                }
+            }
+        }
     }
 
     public void dictionaryAdd() {
