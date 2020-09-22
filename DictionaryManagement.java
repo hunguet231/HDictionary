@@ -49,14 +49,22 @@ public class DictionaryManagement {
 
     public void dictionaryLookup() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Search for: ");
-        String key = sc.next();
-        for(int i = 0; i < numOfWords; ++i) {
-            if (words[i].getWord_target().equals(key)) {
-                System.out.println("Meaning: " + words[i].getWord_explain());
-                break;
+        boolean reEnter = true;
+        String meaning = null;
+        while (reEnter) {
+            System.out.print("Search for: ");
+            String key = sc.next();
+            for (int i = 0; i < numOfWords; ++i) {
+                if (words[i].getWord_target().equals(key)) {
+                    meaning = words[i].getWord_explain();
+                    reEnter = false;
+                }
+            }
+            if (meaning == null) {
+                System.out.println("No result! Please enter another word.");
             }
         }
+        System.out.println("Meaning: " + meaning);
     }
 
     public void show() {
