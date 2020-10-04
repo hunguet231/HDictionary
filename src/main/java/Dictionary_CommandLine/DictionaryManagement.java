@@ -1,43 +1,42 @@
+package main.java.Dictionary_CommandLine;
+
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DictionaryManagement {
     Dictionary dict = new Dictionary();
-    Word[] words = dict.getWords();
-    int numOfWords = 0;
+    ArrayList<Word> words = dict.getWords();
+
+    Scanner sc = new Scanner(System.in);
 
     public void insertFromCommandLine() {
-        Scanner sc = new Scanner(System.in);
-        numOfWords = sc.nextInt();
+        System.out.println("Insert words from CommandLine");
+        System.out.print("Number of words: ");
+        int numOfWords = sc.nextInt();
         sc.nextLine();
-        Word[] words = new Word[numOfWords];
 
         for (int i = 0; i < numOfWords; i++) {
             Word word = new Word();
+            System.out.print((i + 1) + ". Word in English: ");
             word.setWord_target(sc.nextLine());
+            System.out.print("   Word in Vietnamese: ");
             word.setWord_explain(sc.nextLine());
-            words[i] = word;
+            words.add(word);
         }
-
-        dict.setWords(words);
     }
 
     public void insertFromFile() {
         try {
-            File f = new File("src/res/dictionaries.txt");
+            File f = new File("src/main/resources/dictionaries.txt");
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
             String line;
             while ((line = br.readLine()) != null) {
                 String[] lines = line.split("\\t");
-
-                Word word = new Word();
-                word.setWord_target(lines[0]);
-                word.setWord_explain(lines[1]);
-
-                words[numOfWords] = word;
-                numOfWords++;
+                Word word = new Word(lines[0], lines[1]);
+                words.add(word);
             }
             fr.close();
             br.close();
@@ -48,13 +47,13 @@ public class DictionaryManagement {
 
     public void dictionaryExportToFile() {
         try {
-            File f = new File("src/res/dictionaries.txt");
+            File f = new File("src/main/resources/dictionaries.txt");
             FileWriter fw = new FileWriter(f);
 
             // Change words array to string
             String wordsString = "";
-            for (int i = 0; i < numOfWords; i++) {
-                wordsString += words[i].getWord_target() + "\t" + words[i].getWord_explain() + "\n";
+            for (int i = 0; i < words.size(); i++) {
+                wordsString += words.get(i).getWord_target() + "\t" + words.get(i).getWord_explain() + "\n";
             }
 
             // Store data into dictionaries.txt file and close
@@ -66,7 +65,6 @@ public class DictionaryManagement {
     }
 
     public void dictionaryLookup() {
-        Scanner sc = new Scanner(System.in);
         String meaning = null;
 
         while (true) {
@@ -75,9 +73,9 @@ public class DictionaryManagement {
             if (key.equals("X") || key.equals("x")) {
                 return;
             }
-            for (int i = 0; i < numOfWords; ++i) {
-                if (words[i].getWord_target().equals(key)) {
-                    meaning = words[i].getWord_explain();
+            for (int i = 0; i < words.size(); ++i) {
+                if (words.get(i).getWord_target().equals(key)) {
+                    meaning = words.get(i).getWord_explain();
                 }
             }
             if (meaning == null) {
@@ -89,9 +87,7 @@ public class DictionaryManagement {
     }
 
     public void search() {
-        Scanner sc = new Scanner(System.in);
-        Word[] result = new Word[100];
-        int numOfRes = 0;
+        ArrayList<Word> result = new ArrayList<>();
         boolean checkRes = true;
 
         while (true) {
@@ -100,10 +96,9 @@ public class DictionaryManagement {
             if (key.equals("X") || key.equals("x")) {
                 return;
             }
-            for (int i = 0; i < numOfWords; ++i) {
-                if (words[i].getWord_target().startsWith(key)) {
-                    result[numOfRes] = words[i];
-                    numOfRes++;
+            for (int i = 0; i < words.size(); ++i) {
+                if (words.get(i).getWord_target().startsWith(key)) {
+                    result.add(words.get(i));
                     checkRes = false;
                 }
             }
@@ -111,17 +106,18 @@ public class DictionaryManagement {
                 System.out.println("No result! Please enter another word [Enter X to exit]");
             } else {
                 System.out.println("<Result>    [Enter X to exit]");
-                for (int i = 0; i < result.length; i++) {
-                    if (result[i] != null) {
-                        System.out.println("    " + result[i].getWord_target() + ": " + result[i].getWord_explain());
-                    }
+                for (int i = 0; i < result.size(); i++) {
+                    System.out.println((i + 1)
+                            + "    "
+                            + result.get(i).getWord_target()
+                            + ": "
+                            + result.get(i).getWord_explain());
                 }
             }
         }
     }
 
     public void dictionaryAdd() {
-        Scanner sc = new Scanner(System.in);
         Word newWord = new Word();
 
         System.out.println("==============================================");
@@ -132,8 +128,7 @@ public class DictionaryManagement {
         System.out.print("Explain in Vietnamese: ");
         newWord.setWord_explain(sc.nextLine());
 
-        words[numOfWords] = newWord;
-        numOfWords++;
+        words.add(newWord);
 
         dictionaryExportToFile();
 
@@ -141,10 +136,54 @@ public class DictionaryManagement {
     }
 
     public void dictionaryEdit() {
+        try {
+            File f = new File("src/main/resources/dictionaries.txt");
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            FileWriter fw = new FileWriter(f);
+
+            System.out.print("Choose the word that you wanna edit: ");
+            String key = sc.nextLine();
+            System.out.print("New word in English: ");
+            String wordTarget = sc.nextLine();
+            System.out.print("New word in Vietnamese: ");
+            String wordExplain = sc.nextLine();
+
+            String line;
+            String res = "";
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith(key)) {
+                    res += wordTarget + "\t" + wordExplain + "\n";
+                } else {
+                    res += line + "\n";
+                }
+            }
+
+            fw.write(res);
+            fr.close();
+            br.close();
+            fw.close();
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex);
+        }
     }
 
     public void dictionaryDelete() {
+        try {
+            System.out.print("What word do you wanna delete? ");
+            String wordDel = sc.nextLine();
 
+            for (Word word : words) {
+                if (word.getWord_target().equals(wordDel)) {
+                    words.remove(word);
+                    break;
+                }
+            }
+
+            dictionaryExportToFile();
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex);
+        }
     }
 
     public void show() {
@@ -153,10 +192,10 @@ public class DictionaryManagement {
         System.out.println("");
         System.out.println("No" + "    | English" + "         | Vietnamese");
         System.out.println("==============================================");
-        for (int i = 0; i < numOfWords; i++) {
+        for (int i = 0; i < words.size(); i++) {
             System.out.print((i + 1) + "     | ");
-            System.out.printf("%-16s| ", words[i].getWord_target());
-            System.out.print(words[i].getWord_explain() + "\n");
+            System.out.printf("%-16s| ", words.get(i).getWord_target());
+            System.out.print(words.get(i).getWord_explain() + "\n");
         }
         System.out.println("");
     }
