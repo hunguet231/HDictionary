@@ -1,0 +1,20 @@
+.search-box,
+.tool-bar {
+    -fx-background-color: #2e2e2e;
+    -fx-effect: dropshadow(three-pass-box, rgba(29, 29, 29, 0.8), 10, 0, 0, 0);
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+}
+
+.words-list {
+    -fx-focus-color: #2e2e2e;
+}
+
+.aside-left {
+    -fx-border-style: none solid none none;
+    -fx-border-color: #2e2e2e;
+}

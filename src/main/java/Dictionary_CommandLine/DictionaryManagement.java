@@ -52,8 +52,8 @@ public class DictionaryManagement {
 
             // Change words array to string
             String wordsString = "";
-            for (int i = 0; i < words.size(); i++) {
-                wordsString += words.get(i).getWord_target() + "\t" + words.get(i).getWord_explain() + "\n";
+            for (Word word : words) {
+                wordsString += word.getWord_target() + "\t" + word.getWord_explain() + "\n";
             }
 
             // Store data into dictionaries.txt file and close
@@ -73,9 +73,9 @@ public class DictionaryManagement {
             if (key.equals("X") || key.equals("x")) {
                 return;
             }
-            for (int i = 0; i < words.size(); ++i) {
-                if (words.get(i).getWord_target().equals(key)) {
-                    meaning = words.get(i).getWord_explain();
+            for (Word word : words) {
+                if (word.getWord_target().equals(key)) {
+                    meaning = word.getWord_explain();
                 }
             }
             if (meaning == null) {
@@ -96,9 +96,9 @@ public class DictionaryManagement {
             if (key.equals("X") || key.equals("x")) {
                 return;
             }
-            for (int i = 0; i < words.size(); ++i) {
-                if (words.get(i).getWord_target().startsWith(key)) {
-                    result.add(words.get(i));
+            for (Word word : words) {
+                if (word.getWord_target().startsWith(key)) {
+                    result.add(word);
                     checkRes = false;
                 }
             }
@@ -187,9 +187,7 @@ public class DictionaryManagement {
     }
 
     public void show() {
-        System.out.println("");
-        System.out.println("============DICTIONARY COMMAND LINE===========");
-        System.out.println("");
+        System.out.println("\n============DICTIONARY COMMAND LINE===========\n");
         System.out.println("No" + "    | English" + "         | Vietnamese");
         System.out.println("==============================================");
         for (int i = 0; i < words.size(); i++) {
