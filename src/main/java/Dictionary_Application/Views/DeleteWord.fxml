@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="286.0" prefWidth="434.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Dictionary_Application.Controllers.Controller">
+   <children>
+      <JFXButton fx:id="confirmDeleteBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="241.0" layoutY="177.0" onAction="#deleteWord" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #e74c3c;" text="Delete" textFill="WHITE" AnchorPane.rightAnchor="123.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="13.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/right-chevron.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="cancelBtn" buttonType="RAISED" layoutX="119.0" layoutY="177.0" onMouseClicked="#closeDeleteScene" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: #333;" text="Cancle" textFill="WHITE" AnchorPane.leftAnchor="123.0" AnchorPane.rightAnchor="236.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="13.0" fitWidth="21.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/right-chevron.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Text fill="#252525" layoutX="119.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you sure you want to delete this word?" textAlignment="CENTER" wrappingWidth="195.13671875">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

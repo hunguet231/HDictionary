@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="870.0" stylesheets="@../../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Dictionary_Application.Controllers.Controller">
+    <children>
+        <Pane fx:id="addContainer" layoutX="105.0" layoutY="39.0" prefHeight="516.0" prefWidth="661.0">
+            <children>
+                <JFXTextField fx:id="wordFieldEdit" focusColor="#16a085" layoutX="154.0" layoutY="99.0" prefHeight="38.0" prefWidth="393.0" unFocusColor="#b8b8b8">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+                <Text fx:id="addHeading" fill="#5e5e5e" layoutX="228.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Word" textAlignment="CENTER" wrappingWidth="195.97216796875">
+                    <font>
+                        <Font size="29.0" />
+                    </font>
+                </Text>
+                <JFXButton fx:id="cancelBtn" buttonType="RAISED" layoutX="350.0" layoutY="429.0" onMouseClicked="#closeEditScene" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: #333;" text="Cancle" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="21.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../resources/right-chevron.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </JFXButton>
+                <JFXButton fx:id="confirmEditBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="473.0" layoutY="429.0" onMouseClicked="#editWord" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #16a085;" text="Apply" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="13.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../resources/right-chevron.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </JFXButton>
+                <Text fill="#5b5b5b" layoutX="153.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Word:" wrappingWidth="48.13671875">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Text>
+                <Text fill="#5b5b5b" layoutX="153.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phonetic notation:" wrappingWidth="130.13671875">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Text>
+                <Text fill="#5b5b5b" layoutX="153.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meaning:" wrappingWidth="130.13671875">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Text>
+                <JFXTextArea fx:id="meaningFieldEdit" focusColor="#16a085" layoutX="153.0" layoutY="272.0" prefHeight="129.0" prefWidth="393.0" unFocusColor="#b8b8b8" />
+                <Text fill="#5b5b5b" layoutX="424.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="130.13671875">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Text>
+                <JFXComboBox fx:id="wordTypeField" focusColor="#16a085" layoutX="398.0" layoutY="187.0" onAction="#getWordType" prefHeight="45.0" prefWidth="151.0" unFocusColor="#b8b8b8" />
+                <Text fx:id="alertText" fill="#ff3232" layoutX="233.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="195.97216796875">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Text>
+                <JFXTextField fx:id="phoneticFieldEdit" focusColor="#16a085" layoutX="154.0" layoutY="193.0" prefHeight="38.0" prefWidth="159.0" unFocusColor="#b8b8b8">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

@@ -7,7 +7,7 @@
 .text-field {
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-font-weight: 700;
+    -fx-font-weight: 600;
 }
 
 .words-list {
@@ -17,4 +17,27 @@
 .aside-left {
     -fx-border-style: none solid none none;
     -fx-border-color: #2e2e2e;
+}
+
+#addContainer {
+    -fx-background-color: #fff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(116, 116, 116, 0.6), 15, 0, 0, 0);
+}
+
+#wordField,
+#wordFieldEdit,
+#phoneticField,
+#phoneticFieldEdit,
+#meaningField,
+#meaningFieldEdit {
+    -fx-text-fill: #808080;
+    -fx-font-size: 17px;
+}
+
+#addBtn:hover,
+#editBtn:hover,
+#deleteBtn:hover {
+    -fx-effect: dropshadow(gaussian, rgb(255, 255, 255), 30, 0, 0, -10);
 }
