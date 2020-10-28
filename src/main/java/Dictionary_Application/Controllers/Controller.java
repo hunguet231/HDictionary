@@ -262,8 +262,6 @@ public class Controller implements Initializable {
         String key = SharedData.getInstance().getCurrentSelectedWord();
         words.remove(key);
 
-        // update list view // todo
-
         // store to file
         SharedData.getInstance().dictExportToFile(DATA_FILE_PATH, words);
 

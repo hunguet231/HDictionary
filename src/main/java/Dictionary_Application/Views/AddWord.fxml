@@ -16,7 +16,7 @@
    <children>
       <Pane fx:id="addContainer" layoutX="105.0" layoutY="39.0" prefHeight="516.0" prefWidth="661.0">
          <children>
-            <JFXTextField fx:id="wordField" focusColor="#2980b9" layoutX="154.0" layoutY="99.0" prefHeight="38.0" prefWidth="393.0" promptText="e.g. cat" unFocusColor="#b8b8b8">
+            <JFXTextField fx:id="wordField" focusColor="#2980b9" layoutX="218.0" layoutY="102.0" prefHeight="38.0" prefWidth="393.0" promptText="e.g. cat" unFocusColor="#b8b8b8">
                <font>
                   <Font size="14.0" />
                </font>
@@ -26,7 +26,7 @@
                   <Font size="29.0" />
                </font>
             </Text>
-            <JFXButton fx:id="cancelBtn" buttonType="RAISED" layoutX="350.0" layoutY="429.0" onMouseClicked="#closeAddScene" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: #333;" text="Cancle" textFill="WHITE">
+            <JFXButton fx:id="cancelBtn" buttonType="RAISED" layoutX="309.0" layoutY="429.0" onMouseClicked="#closeAddScene" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: #333;" text="Cancle" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -41,7 +41,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="confirmAddBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="473.0" layoutY="429.0" onMouseClicked="#addWord" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #146eae;" text="Add" textFill="WHITE">
+            <JFXButton fx:id="confirmAddBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="442.0" layoutY="429.0" onMouseClicked="#addWord" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #146eae;" text="Add" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -56,38 +56,43 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Text fill="#5b5b5b" layoutX="153.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Word:" wrappingWidth="48.13671875">
+            <Text fill="#5b5b5b" layoutX="218.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Word:" wrappingWidth="48.13671875">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fill="#5b5b5b" layoutX="153.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phonetic notation:" wrappingWidth="130.13671875">
+            <Text fill="#5b5b5b" layoutX="218.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phonetic notation:" wrappingWidth="130.13671875">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fill="#5b5b5b" layoutX="153.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meaning:" wrappingWidth="130.13671875">
+            <Text fill="#5b5b5b" layoutX="218.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meaning:" wrappingWidth="130.13671875">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <JFXTextArea fx:id="meaningField" layoutX="153.0" layoutY="272.0" prefHeight="129.0" prefWidth="393.0" unFocusColor="#b8b8b8" />
-            <Text fill="#5b5b5b" layoutX="424.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="130.13671875">
+            <JFXTextArea fx:id="meaningField" layoutX="218.0" layoutY="268.0" prefHeight="129.0" prefWidth="393.0" unFocusColor="#b8b8b8" />
+            <Text fill="#5b5b5b" layoutX="460.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="130.13671875">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <JFXComboBox fx:id="wordTypeField" layoutX="398.0" layoutY="187.0" onAction="#getWordType" prefHeight="45.0" prefWidth="151.0" unFocusColor="#b8b8b8" />
-            <Text fx:id="alertText" fill="#ff3232" layoutX="233.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="195.97216796875">
+            <JFXComboBox fx:id="wordTypeField" layoutX="460.0" layoutY="188.0" onAction="#getWordType" prefHeight="45.0" prefWidth="151.0" unFocusColor="#b8b8b8" />
+            <Text fx:id="alertText" fill="#ff3232" layoutX="218.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="195.97216796875">
                <font>
                   <Font size="13.0" />
                </font>
             </Text>
-            <JFXTextField fx:id="phoneticField" focusColor="#2980b9" layoutX="154.0" layoutY="193.0" prefHeight="38.0" prefWidth="159.0" promptText="e.g. /kæt/" unFocusColor="#b8b8b8">
+            <JFXTextField fx:id="phoneticField" focusColor="#2980b9" layoutX="218.0" layoutY="191.0" prefHeight="38.0" prefWidth="159.0" promptText="e.g. /kæt/" unFocusColor="#b8b8b8">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
+            <ImageView fitHeight="126.0" fitWidth="200.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/undraw_building_blocks_n0nc1.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

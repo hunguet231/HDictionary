@@ -57,9 +57,13 @@ public class Main extends Application {
         wordsList.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     Word selectedWord = words.get(newValue.trim());
-                    String definition = selectedWord.getMeaning();
-                    SharedData.getInstance().setCurrentSelectedWord(selectedWord.getWord());
-                    resultField.getEngine().loadContent(definition, "text/html");
+                    if (selectedWord != null) {
+                        String definition = selectedWord.getMeaning();
+                        SharedData.getInstance().setCurrentSelectedWord(selectedWord.getWord());
+                        resultField.getEngine().loadContent(definition, "text/html");
+                    } else {
+                        resultField.getEngine().loadContent("Oops, this word has been deleted!", "text/html");
+                    }
                 }
         );
     }
