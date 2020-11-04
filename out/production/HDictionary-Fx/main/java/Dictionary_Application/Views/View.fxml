@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.*?>
@@ -59,27 +57,37 @@
                         </ImageView>
                     </children>
                 </GridPane>
-                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="213.0" styleClass="search-box">
+                <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="213.0" styleClass="search-box">
                     <children>
-                        <TextField fx:id="searchText" onAction="#search" onKeyTyped="#searchOnInputChange" prefHeight="33.0" prefWidth="130.0" promptText="Search..." styleClass="text-field">
+                        <TextField fx:id="searchText" onAction="#search" onKeyTyped="#searchOnInputChange" prefHeight="33.0" prefWidth="183.0" promptText="Search..." styleClass="text-field">
                             <font>
                                 <Font size="15.0" />
                             </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="-15.0" />
+                     </HBox.margin>
                         </TextField>
-                        <ImageView fx:id="searchButton" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#search" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../../resources/search.png" />
-                            </image>
-                            <HBox.margin>
-                                <Insets right="5.0" />
-                            </HBox.margin>
-                            <cursor>
-                                <Cursor fx:constant="HAND" />
-                            </cursor>
-                        </ImageView>
+                  <JFXButton fx:id="searchButton" buttonType="RAISED" contentDisplay="RIGHT" onAction="#search" prefHeight="36.0" prefWidth="58.0" ripplerFill="#4d4d4d" style="-fx-background-color: transparent;">
+                     <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                  <image>
+                                      <Image url="@../../../resources/search.png" />
+                                  </image>
+                                  <cursor>
+                                      <Cursor fx:constant="HAND" />
+                                  </cursor>
+                              </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="35.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
                     </children>
                 </HBox>
-                <JFXListView fx:id="wordsList" prefHeight="518.0" prefWidth="213.0" styleClass="words-list" />
+            <JFXListView fx:id="wordsList" prefHeight="517.0" prefWidth="213.0" />
             </children>
         </VBox>
         <VBox alignment="BOTTOM_LEFT" layoutX="215.0" prefHeight="600.0" prefWidth="655.0">
@@ -89,7 +97,7 @@
                         <Hyperlink ellipsisString="https://fb.com/hungnguyen2301" text="v1.0.0" textFill="WHITE" />
                     </children>
                 </VBox>
-                <ToolBar prefHeight="58.0" prefWidth="655.0">
+                <ToolBar prefHeight="58.0" prefWidth="655.0" stylesheets="@../../../resources/main.css">
                     <items>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -111,30 +119,51 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <ImageView fx:id="addBtn" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#showAddScene" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../../resources/plus.png" />
-                                    </image>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </ImageView>
-                                <ImageView fx:id="editBtn" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#showEditScene" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                                    <image>
-                                        <Image url="@../../../resources/edit.png" />
-                                    </image>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </ImageView>
-                                <ImageView fx:id="deleteBtn" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#showDeleteScene" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                                    <image>
-                                        <Image url="@../../../resources/delete.png" />
-                                    </image>
-                                    <cursor>
-                                        <Cursor fx:constant="HAND" />
-                                    </cursor>
-                                </ImageView>
+                        <JFXButton fx:id="addBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onMouseClicked="#showAddScene" prefHeight="25.0" prefWidth="100.0" ripplerFill="#4d4d4d" textFill="TRANSPARENT">
+                           <graphic>
+                                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                              <Image url="@../../../resources/plus.png" />
+                                          </image>
+                                          <cursor>
+                                              <Cursor fx:constant="HAND" />
+                                          </cursor>
+                                      </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="editBtn" buttonType="RAISED" contentDisplay="CENTER" onMouseClicked="#showEditScene" prefHeight="25.0" prefWidth="100.0" ripplerFill="#4d4d4d" textFill="TRANSPARENT" GridPane.columnIndex="1">
+                           <graphic>
+                                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                              <Image url="@../../../resources/edit.png" />
+                                          </image>
+                                          <cursor>
+                                              <Cursor fx:constant="HAND" />
+                                          </cursor>
+                                      </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="deleteBtn" buttonType="RAISED" contentDisplay="CENTER" onMouseClicked="#showDeleteScene" prefHeight="25.0" prefWidth="100.0" ripplerFill="#4d4d4d" textFill="TRANSPARENT" GridPane.columnIndex="2">
+                           <graphic>
+                                      <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                              <Image url="@../../../resources/delete.png" />
+                                          </image>
+                                          <cursor>
+                                              <Cursor fx:constant="HAND" />
+                                          </cursor>
+                                      </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                             </children>
                         </GridPane>
                     </items>
@@ -152,7 +181,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                      <WebView fx:id="resultField" prefHeight="514.0" prefWidth="660.0">
+                      <WebView fx:id="resultField" blendMode="DARKEN" prefHeight="514.0" prefWidth="660.0">
                 </WebView>
                </children>
             </HBox>

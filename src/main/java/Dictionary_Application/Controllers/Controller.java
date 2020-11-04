@@ -15,29 +15,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import main.java.Dictionary_Application.Main;
 import main.java.Dictionary_Application.Models.SharedData;
 import main.java.Dictionary_Application.Models.Word;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     Map<String, Word> words = SharedData.getInstance().getWords();
     Map<String, Word> wordsSearchList = SharedData.getInstance().getWordsSearchList();
+    Stage window = SharedData.getInstance().getWindow();
     private static final String DATA_FILE_PATH = "src/main/resources/E_V.txt";
     String wordType;
 
     @FXML
-    private JFXListView<String> wordsList = new JFXListView<>();
+    JFXListView<String> wordsList = new JFXListView<>();
+
+    @FXML
+    WebView resultField = new WebView();
 
     @FXML
     private JFXTextField wordField = new JFXTextField();
@@ -55,9 +57,6 @@ public class Controller implements Initializable {
     private JFXTextField phoneticField;
 
     @FXML
-    private WebView resultField;
-
-    @FXML
     private TextField searchText;
 
     @FXML
@@ -70,16 +69,16 @@ public class Controller implements Initializable {
     private TextArea meaningFieldEdit;
 
     @FXML
-    private JFXTextField exampleField;
+    private JFXButton searchButton;
 
     @FXML
-    private ImageView editBtn;
+    private JFXButton editBtn;
 
     @FXML
-    private ImageView addBtn;
+    private JFXButton addBtn;
 
     @FXML
-    private ImageView deleteBtn;
+    private JFXButton deleteBtn;
 
     @FXML
     private ImageView speakBtn;
@@ -105,7 +104,15 @@ public class Controller implements Initializable {
     void search() {
         String key = searchText.getText();
         if (words.get(key) == null) {
-            resultField.getEngine().loadContent("No words found", "text/html");
+            File file = new File("src/main/resources/notFound.html");
+            try {
+                URL url = null;
+                url = file.toURI().toURL();
+                resultField.getEngine().load(url.toString());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
             return;
         }
         SharedData.getInstance().setCurrentSelectedWord(key);
@@ -130,10 +137,9 @@ public class Controller implements Initializable {
     @FXML
         // show add scene
     void showAddScene() throws IOException {
-        Stage addStage = SharedData.getInstance().getAddStage();
-        addStage.setTitle("Add new word");
-        addStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../Views/AddWord.fxml"))));
-        addStage.show();
+        window.setTitle("Add new word");
+        window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../Views/AddWord.fxml"))));
+        window.show();
     }
 
     @FXML
@@ -155,8 +161,7 @@ public class Controller implements Initializable {
             String newWord = wordField.getText();
 
             String newWordMeaning =
-                    "<html>"
-                            + "<i>" + "&nbsp" + phoneticField.getText() + "</i>"
+                    "<html>" + "<i>" + "&nbsp" + phoneticField.getText() + "</i>"
                             + "<br/>"
                             + "<ul>"
                             + "<li>" + "<b><i>" + wordType + "</i></b>"
@@ -166,8 +171,7 @@ public class Controller implements Initializable {
                             + "</li>"
                             + "</ul>"
                             + "</li>"
-                            + "</ul>"
-                            + "</html>";
+                            + "</ul>" + "</html>";
 
             Word newWordObj = new Word(newWord, newWordMeaning);
             words.put(newWord, newWordObj);
@@ -175,8 +179,9 @@ public class Controller implements Initializable {
             // store new word to data file
             SharedData.getInstance().dictExportToFile(DATA_FILE_PATH, words);
 
-            // close add view
-            SharedData.getInstance().getAddStage().close();
+            // back to main app
+            goMainScene();
+
         } else {
             alertText.setText("Please fill in all fields");
         }
@@ -190,10 +195,9 @@ public class Controller implements Initializable {
         // show edit scene
     void showEditScene() throws IOException {
         if (resultField.getEngine().getDocument() != null) {
-            Stage editStage = SharedData.getInstance().getEditStage();
-            editStage.setTitle("Edit word");
-            editStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../Views/EditWord.fxml"))));
-            editStage.show();
+            window.setTitle("Edit word");
+            window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../Views/EditWord.fxml"))));
+            window.show();
         } else {
             return;
         }
@@ -231,8 +235,8 @@ public class Controller implements Initializable {
             // store new word to data file
             SharedData.getInstance().dictExportToFile(DATA_FILE_PATH, words);
 
-            // close edit view
-            SharedData.getInstance().getEditStage().close();
+            // back to main app
+            goMainScene();
         } else {
             alertText.setText("Please fill in all fields");
         }
@@ -246,10 +250,9 @@ public class Controller implements Initializable {
         // show delete scene
     void showDeleteScene() throws IOException {
         if (resultField.getEngine().getDocument() != null) {
-            Stage deleteStage = SharedData.getInstance().getDeleteStage();
-            deleteStage.setTitle("Delete word");
-            deleteStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../Views/DeleteWord.fxml"))));
-            deleteStage.show();
+            window.setTitle("Delete word");
+            window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../Views/DeleteWord.fxml"))));
+            window.show();
         } else {
             return;
         }
@@ -265,8 +268,8 @@ public class Controller implements Initializable {
         // store to file
         SharedData.getInstance().dictExportToFile(DATA_FILE_PATH, words);
 
-        // close delete view
-        SharedData.getInstance().getDeleteStage().close();
+        // back to main app
+        goMainScene();
     }
 
     /*========================================*/
@@ -281,10 +284,12 @@ public class Controller implements Initializable {
         if (voice != null) {
             voice.allocate();
             try {
-                voice.setRate(200);
-                voice.setPitch(150);
+                voice.setRate(155);
+                voice.setPitch(130);
                 voice.setVolume(5);
-                voice.speak(SharedData.getInstance().getCurrentSelectedWord());
+                if (SharedData.getInstance().getCurrentSelectedWord() != null) {
+                    voice.speak(SharedData.getInstance().getCurrentSelectedWord());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -294,18 +299,27 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void closeAddScene() throws IOException {
-        SharedData.getInstance().getAddStage().close();
-    }
+    void goMainScene() throws IOException {
+        window.setTitle("HDictionary");
 
-    @FXML
-    void closeEditScene() throws IOException {
-        SharedData.getInstance().getEditStage().close();
-    }
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../Views/View.fxml")));
+        window.setScene(scene);
+        window.show();
 
-    @FXML
-    void closeDeleteScene() throws IOException {
-        SharedData.getInstance().getDeleteStage().close();
+        resultField = (WebView) scene.lookup("#resultField");
+        wordsList = (JFXListView<String>) scene.lookup("#wordsList");
+
+        // load selected word
+        wordsList.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    Word selectedWord = words.get(newValue.trim());
+                    String definition = selectedWord.getMeaning();
+                    SharedData.getInstance().setCurrentSelectedWord(selectedWord.getWord());
+                    resultField.getEngine().loadContent(definition, "text/html");
+                }
+        );
+
+        wordsList.getItems().addAll(words.keySet());
     }
 
     @Override
@@ -318,5 +332,14 @@ public class Controller implements Initializable {
         wordTypeField.setItems(list);
 
         wordFieldEdit.setText(SharedData.getInstance().getCurrentSelectedWord());
+
+        File file = new File("src/main/resources/emptyWord.html");
+        try {
+            url = file.toURI().toURL();
+            resultField.getEngine().load(url.toString());
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }

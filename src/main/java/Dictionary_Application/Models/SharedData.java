@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 
 public class SharedData {
     private Map<String, Word> words = new TreeMap<>();
-    private Stage addStage = new Stage();
-    private Stage editStage = new Stage();
-    private Stage deleteStage = new Stage();
+    private Stage window = new Stage();
     private Map<String, Word> wordsSearchList = new TreeMap<>();
     private String currentSelectedWord;
     String wordsString = "";
@@ -41,16 +39,12 @@ public class SharedData {
         return words;
     }
 
-    public Stage getAddStage() {
-        return addStage;
+    public Stage getWindow() {
+        return window;
     }
 
-    public Stage getEditStage() {
-        return editStage;
-    }
-
-    public Stage getDeleteStage() {
-        return deleteStage;
+    public void setWindow(Stage window) {
+        this.window = window;
     }
 
     public String getCurrentSelectedWord() {

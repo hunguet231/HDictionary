@@ -1,10 +1,10 @@
 package main.java.Dictionary_Application;
 
+import com.jfoenix.controls.JFXListView;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -23,13 +23,15 @@ public class Main extends Application {
     private static final String SPLITTING_CHARACTERS = "<html>";
 
     @FXML
-    private ListView<String> wordsList;
+    JFXListView<String> wordsList = new JFXListView<>();
 
     @FXML
-    private WebView resultField;
+    WebView resultField = new WebView();
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void
+    start(Stage primaryStage) throws Exception {
+        SharedData.getInstance().setWindow(primaryStage);
         primaryStage.getIcons().add(new Image("main/resources/icon.png"));
         primaryStage.setTitle("HDictionary");
 
@@ -51,19 +53,15 @@ public class Main extends Application {
 
     public void initComponents(Scene scene) {
         resultField = (WebView) scene.lookup("#resultField");
-        wordsList = (ListView<String>) scene.lookup("#wordsList");
+        wordsList = (JFXListView<String>) scene.lookup("#wordsList");
 
         // load selected word
         wordsList.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     Word selectedWord = words.get(newValue.trim());
-                    if (selectedWord != null) {
-                        String definition = selectedWord.getMeaning();
-                        SharedData.getInstance().setCurrentSelectedWord(selectedWord.getWord());
-                        resultField.getEngine().loadContent(definition, "text/html");
-                    } else {
-                        resultField.getEngine().loadContent("Oops, this word has been deleted!", "text/html");
-                    }
+                    String definition = selectedWord.getMeaning();
+                    SharedData.getInstance().setCurrentSelectedWord(selectedWord.getWord());
+                    resultField.getEngine().loadContent(definition, "text/html");
                 }
         );
     }
@@ -93,4 +91,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

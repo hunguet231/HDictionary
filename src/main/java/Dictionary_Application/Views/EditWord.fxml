@@ -26,7 +26,7 @@
                         <Font size="29.0" />
                     </font>
                 </Text>
-                <JFXButton fx:id="cancelBtn" buttonType="RAISED" layoutX="326.0" layoutY="429.0" onMouseClicked="#closeEditScene" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: #333;" text="Cancle" textFill="WHITE">
+                <JFXButton fx:id="cancelBtn" buttonType="RAISED" layoutX="326.0" layoutY="429.0" onMouseClicked="#goMainScene" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #333;" text="Cancle" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -41,7 +41,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </JFXButton>
-                <JFXButton fx:id="confirmEditBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="461.0" layoutY="429.0" onMouseClicked="#editWord" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #16a085;" text="Apply" textFill="WHITE">
+                <JFXButton fx:id="confirmEditBtn" buttonType="RAISED" contentDisplay="RIGHT" layoutX="461.0" layoutY="429.0" onMouseClicked="#editWord" prefHeight="38.0" prefWidth="90.0" style="-fx-background-color: #16a085;" text="Apply" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

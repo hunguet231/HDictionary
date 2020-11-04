@@ -27,6 +27,7 @@ This dictionary uses a number of open source projects :
 ![](src/main/resources/demo_photos/2.PNG)
 ![](src/main/resources/demo_photos/3.PNG)
 ![](src/main/resources/demo_photos/4.PNG)
+![](src/main/resources/demo_photos/5.PNG)
 
 ---
 

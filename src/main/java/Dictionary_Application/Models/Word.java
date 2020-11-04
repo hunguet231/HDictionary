@@ -3,7 +3,6 @@ package main.java.Dictionary_Application.Models;
 public class Word {
     private String word;
     private String meaning;
-    private String pronounce;
 
     public Word() {
 
@@ -12,12 +11,6 @@ public class Word {
     public Word(String word, String meaning) {
         this.word = word;
         this.meaning = meaning;
-    }
-
-    public Word(String word, String meaning, String pronounce) {
-        this.word = word;
-        this.meaning = meaning;
-        this.pronounce = pronounce;
     }
 
     public void setWord(String word) {
@@ -34,13 +27,5 @@ public class Word {
 
     public String getMeaning() {
         return meaning;
-    }
-
-    public void setPronounce(String pronounce) {
-        this.pronounce = pronounce;
-    }
-
-    public String getPronounce() {
-        return pronounce;
     }
 }
